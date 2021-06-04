@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   videoCard: {
-
+    marginVertical: 15
   },
   thumbnail: { 
     width: '100%', 
