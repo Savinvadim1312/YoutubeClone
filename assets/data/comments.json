@@ -1,0 +1,56 @@
+[{
+  "id": "1",
+  "createdAt": "5 months ago",
+  "comment": "Cool video!",
+  "user": {
+    "name": "Graham Stephan",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/graham.jpg"
+  },
+  "likes": 123,
+  "dislikes": 2,
+  "replies": 6
+}, {
+  "id": "2",
+  "createdAt": "5 months ago",
+  "comment": "Thanks )",
+  "user": {
+    "name": "Vadim Savin",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg"
+  },
+  "likes": 113,
+  "dislikes": 2,
+  "replies": 6
+}, {
+  "id": "3",
+  "createdAt": "5 months ago",
+  "comment": "Lorem Ipsum",
+  "user": {
+    "name": "Vadim Savin",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg"
+  },
+  "likes": 113,
+  "dislikes": 2,
+  "replies": 6
+}, {
+  "id": "4",
+  "createdAt": "5 months ago",
+  "comment": "Thanks )",
+  "user": {
+    "name": "Vadim Savin",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg"
+  },
+  "likes": 113,
+  "dislikes": 2,
+  "replies": 6
+}, {
+  "id": "5",
+  "createdAt": "5 months ago",
+  "comment": "Thanks )",
+  "user": {
+    "name": "Vadim Savin",
+    "image": "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg"
+  },
+  "likes": 113,
+  "dislikes": 2,
+  "replies": 6
+}]
