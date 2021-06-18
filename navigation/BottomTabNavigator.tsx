@@ -3,19 +3,25 @@
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
 
-import { Foundation, Ionicons, AntDesign, MaterialIcons } from '@expo/vector-icons'; 
+import {
+  Foundation,
+  Ionicons,
+  AntDesign,
+  MaterialIcons,
+} from "@expo/vector-icons";
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import * as React from "react";
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import Colors from "../constants/Colors";
+import useColorScheme from "../hooks/useColorScheme";
+import TabTwoScreen from "../screens/TabTwoScreen";
 
-import HomeStack from './HomeStack';
+import HomeStack from "./HomeStack";
 
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList } from "../types";
+import VideoUploadScreen from "../screens/VideoUploadScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -25,43 +31,54 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
-      tabBarOptions={{ 
+      tabBarOptions={{
         activeTintColor: Colors[colorScheme].tint,
-        labelPosition: 'below-icon'
-      }}>
+        labelPosition: "below-icon",
+      }}
+    >
       <BottomTab.Screen
         name="Home"
         component={HomeStack}
         options={{
-          tabBarIcon: ({ color }) => <Foundation name="home" size={24} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Foundation name="home" size={24} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
         name="Explore"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <Ionicons name="compass-outline" size={24} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="compass-outline" size={24} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
         name="New"
-        component={TabTwoNavigator}
+        component={UploadNavigator}
         options={{
-          tabBarIcon: ({ color }) => <AntDesign name="pluscircleo" size={24} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="pluscircleo" size={24} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
         name="Subscriptions"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <MaterialIcons name="subscriptions" size={24} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="subscriptions" size={24} color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
         name="Library"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <MaterialIcons name="video-collection" size={24} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="video-collection" size={24} color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -76,8 +93,22 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        options={{ headerTitle: "Tab Two Title" }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const UploadStack = createStackNavigator();
+
+function UploadNavigator() {
+  return (
+    <UploadStack.Navigator>
+      <UploadStack.Screen
+        name="VideoUpload"
+        component={VideoUploadScreen}
+        options={{ headerTitle: "Upload a video" }}
+      />
+    </UploadStack.Navigator>
   );
 }
