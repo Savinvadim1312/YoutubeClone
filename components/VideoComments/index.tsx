@@ -3,7 +3,7 @@ import { View, Text, TextInput, Pressable } from "react-native";
 import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { Feather } from "@expo/vector-icons";
 import { DataStore, Auth } from "aws-amplify";
-import { Comment } from "../../src/models";
+import { Comment, User } from "../../src/models";
 
 import VideoComment from "../VideoComment";
 
@@ -17,6 +17,14 @@ const VideoComments = ({ comments, videoID }: VideoCommentsProps) => {
 
   const sendComment = async () => {
     const userInfo = await Auth.currentAuthenticatedUser();
+    const userSub = userInfo.attributes.sub;
+
+    const user = (await DataStore.query(User)).find(u => u.sub === userSub);
+
+    if (!user) {
+      console.error("User not found");
+      return;
+    }
 
     await DataStore.save(
       new Comment({
@@ -25,7 +33,7 @@ const VideoComments = ({ comments, videoID }: VideoCommentsProps) => {
         dislikes: 0,
         replies: 0,
         videoID,
-        userID: userInfo.attributes.sub,
+        userID: user.id,
       })
     );
     setNewComment("");
