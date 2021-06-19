@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import styles from "./styles";
-import { Storage } from "aws-amplify";
+import { Storage, Analytics } from "aws-amplify";
 
 import { useNavigation } from "@react-navigation/native";
 import { Video } from "../../src/models";
@@ -36,6 +36,7 @@ const VideoListItem = (props: VideoListItemProps) => {
   }
 
   const openVideoPage = () => {
+    Analytics.record({ name: "VideoListItemClick" });
     navigation.navigate("VideoScreen", { id: video.id });
   };
 
