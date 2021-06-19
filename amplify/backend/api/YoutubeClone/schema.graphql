@@ -1,0 +1,37 @@
+type Comment @model @key(name: "byVideo", fields: ["videoID"]) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}, {allow: private, operations: [read, create]}]) @key(name: "byUser", fields: ["userID"]) {
+  id: ID!
+  comment: String!
+  likes: Int!
+  dislikes: Int!
+  replies: Int!
+  videoID: ID
+  User: User @connection
+  Video: Video @connection
+  userID: ID
+}
+
+type User @model @auth(rules: [{allow: private, operations: [read, create, update, delete]}, {allow: owner, operations: [read, create]}]) {
+  id: ID!
+  name: String!
+  image: String
+  subscribers: Int
+  Videos: [Video] @connection(keyName: "byUser", fields: ["id"])
+  Comments: [Comment] @connection(keyName: "byUser", fields: ["id"])
+  sub: String
+}
+
+type Video @model @key(name: "byUser", fields: ["userID"]) @auth(rules: [{allow: owner, operations: [read, create, update, delete]}, {allow: private, operations: [read, create]}]) {
+  id: ID!
+  title: String!
+  thumbnail: String!
+  videoUrl: String!
+  duration: Float!
+  views: Int!
+  tags: String
+  likes: Int!
+  dislikes: String!
+  User: User @connection
+  Comments: [Comment] @connection(keyName: "byVideo", fields: ["id"])
+  userID: ID
+}
+ 

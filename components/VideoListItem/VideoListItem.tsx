@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import styles from "./styles";
+import { Storage, Analytics } from "aws-amplify";
 
 import { useNavigation } from "@react-navigation/native";
 import { Video } from "../../src/models";
@@ -12,8 +13,17 @@ type VideoListItemProps = {
 
 const VideoListItem = (props: VideoListItemProps) => {
   const { video } = props;
+  const [image, setImage] = useState<string | null>(null);
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (video.thumbnail.startsWith("http")) {
+      setImage(video.thumbnail);
+    } else {
+      Storage.get(video.thumbnail).then(setImage);
+    }
+  }, [video]);
 
   const minutes = Math.floor(video.duration / 60);
   const seconds = video.duration % 60;
@@ -26,6 +36,7 @@ const VideoListItem = (props: VideoListItemProps) => {
   }
 
   const openVideoPage = () => {
+    Analytics.record({ name: "VideoListItemClick" });
     navigation.navigate("VideoScreen", { id: video.id });
   };
 
@@ -33,7 +44,7 @@ const VideoListItem = (props: VideoListItemProps) => {
     <Pressable onPress={openVideoPage} style={styles.videoCard}>
       {/* Tumbnail */}
       <View>
-        <Image style={styles.thumbnail} source={{ uri: video.thumbnail }} />
+        <Image style={styles.thumbnail} source={{ uri: image || "" }} />
         <View style={styles.timeContainer}>
           <Text style={styles.time}>
             {minutes}:{seconds < 10 ? "0" : ""}
